@@ -1,9 +1,9 @@
----
-author:
-- Frank Weate 
-date: November 2021
-title: Typing Mania
----
+
+
+# Frank Weate 
+November 2021 <br>
+see **project.pdf** for more detail and images 
+
 
 # A Typing Algorithm
 
@@ -44,7 +44,7 @@ weighted more highly.
 ## Dataset:
 
 The dataset I used for this project is
-[w](https://www.kaggle.com/rtatman/english-word-frequency)hich
+[here](https://www.kaggle.com/rtatman/english-word-frequency) and it
 \"contains the counts of the 333,333 most commonly-used single words on
 the English language web, as derived from the Google Web Trillion Word
 Corpus.\" This very useful as it allows for a gauge of the popularity of
@@ -68,9 +68,10 @@ created an adjacency list graph containing words with a similarity of
 greater than 0.4 in the dictionary to that word. For example the top 10
 words in the adjacency list for the word \"the\" are:
 
-::: {.center}
-`the,"[(’thee’, 0.8333333333333334), (’they’, 0.75), (’them’, 0.75), (’then’, 0.75), (’thew’, 0.75), (’he’, 0.6666666666666666), (’there’, 0.6666666666666666), (’these’, 0.6666666666666666), (’theme’, 0.6666666666666666), (’theft’, 0.6666666666666666), )...] `
-:::
+```
+the,"[(’thee’, 0.8333333333333334), (’they’, 0.75), (’them’, 0.75), (’then’, 0.75), (’thew’, 0.75), (’he’, 0.6666666666666666), (’there’, 0.6666666666666666), (’these’, 0.6666666666666666), (’theme’, 0.6666666666666666), (’theft’, 0.6666666666666666), )...] 
+```
+
 
 These words all have a distinct similarity with respect to how they are
 typed to the word \"the\". Not only is this graph useful for obtaining
@@ -115,7 +116,7 @@ each other:
     substring in \"the\" and we must find some way of expressing that
     similarity in our model. An example with bits can be seen below:
 
-    [Hamming Distance of 10 bits]{.image}
+    
 
 -   **Levenshtein distance**: The Levenshtein distance works on the
     minimum number of single character insertions, deletions and
@@ -145,9 +146,9 @@ each other:
     concern should not be placed on the scalability of the algorithm for
     when n is large.
 
-    ::: {.center}
-    [Convolution of two strings]{.image}
-    :::
+    
+    
+    
 
     One thing of note is that when using this convolution method,
     substrings within other substrings were not counted. For example if
@@ -205,7 +206,7 @@ in the dataset can be ranked like this as well. The alogrithm is used to
 page nodes in a graph by the number and quality of the links that are
 pointing to them. as shown below:
 
-[An image of a nodes being ranked by pagerank]{.image}
+
 
 With an adjacency list of words, the ranking algorithm takes into
 account the degree of similarity between two words along with the
@@ -235,7 +236,6 @@ the probability that a random surfer will teleport to a random node in
 the graph. For surfing this graph the $\alpha$ was kept at 0.85. This
 allows the whole graph to be suitably explored. As shown below:
 
-[A random surfer choosing where to walk next]{.image}
 
 With an $\alpha$ of 0.85, there is an 85% chance that the nodes will go
 one of the current nodes connections. But there is also a 15% chance
@@ -260,7 +260,7 @@ Unlike with traditional Pagerank that was used on pages on websites, the
 landscape of this graph is quite different. Here is a list of the top
 twenty-five words found by the algorithm:
 
-::: {.center}
+```
     in,2996714
     the,2081008
     a,1821925
@@ -291,9 +291,8 @@ twenty-five words found by the algorithm:
     one,326130
     he,303469
     here,293988
-    ...
-    ...
-:::
+  ```
+
 
 Even though in the original kaggle dataset 'the' was listed as the most
 popular word, after applying wordrank 'in' was regarded as the most
@@ -313,9 +312,6 @@ is going to randomly surf the graph. The goal is to find similar words
 to the previous under-performing words and recommend those word for the
 user the practice.
 
-::: {.center}
-:::
-
 To get the slower words that have been typed we simply take the average
 of all the words that have been typed so far, and subtract that from
 that word's time. Clearly if this number is positive it means that the
@@ -334,17 +330,14 @@ inefficient. Once a list of inefficient words has been created, similar
 words to this inefficient word can be found in the similarity graph. for
 example as seen in the graph.csv file:
 
-::: {.center}
-` word,"[(’words’, 0.8), (’sword’, 0.8), (’wordy’, 0.8), (’worded’, 0.7083333333333334), (’reword’, 0.7083333333333334), (’swords’, 0.6666666666666666) ... (’wordsmiths’, 0.4), (’wordlessly’, 0.4), (’catchwords’, 0.4)]" `
-:::
-
+```
+ word,"[(’words’, 0.8), (’sword’, 0.8), (’wordy’, 0.8), (’worded’, 0.7083333333333334), (’reword’, 0.7083333333333334), (’swords’, 0.6666666666666666) ... (’wordsmiths’, 0.4), (’wordlessly’, 0.4), (’catchwords’, 0.4)]" 
+```
 We take two random words from this list, and add them to the next
 paragraph iteration. So if a user under-performed on 'word', then
 'swords' and 'catchwords' could be added to the next iteration.
 
-::: {.center}
-\] \[.catchwords \[.patchworks \] \[.words \] \]\]
-:::
+
 
 The structure that is being made is essentially a binary search tree. As
 the user iterates over more and more paragraphs this tree will keep on
@@ -373,27 +366,18 @@ $\alpha$ be? With some trial and error, I estimated alpha to be best at
 
 ### Program Example:
 
-::: {.center}
-[The start of the program]{.image}
-:::
+
 
 The program begins by getting random words from the dictionary based on
 their wordrank. It is fairly obvious from looking at the paragraph that
 words with high word-ranks are there such as:
 
-::: {.center}
-\"that\" $17^{th}$, \"is\" $7^{th}$, \"free\" $31^{st}$, \"as\"
-$12^{th}$, \"to\" $8^{th}$, \"list \"$83^{rd}$, \"will \"$27^{th}$,
-\"an\" $11^{th}$
-:::
 
 but also uncommon words such as \"contactable\" and \"pylon\". The
 program will get roughly half of these nodes based on the user's typing
 performance and get 2 similar words for the next paragraph.
 
-::: {.center}
-[The second paragraph]{.image}
-:::
+
 
 (also worth noting that the word list has not been Censored). Since
 \"table\" was the worst performing word here, the words \"stabler\" and
@@ -412,16 +396,16 @@ effective system is at recommendations. The file essentially passes in
 fake word data about how long a word has taken to be typed. For most
 words in the paragraph the time taken was in pythonic terms
 
-::: {.center}
+
 `T_w=random.random()+ random.random()+ random.random()`
-:::
+
 
 But the tester finds words with a certain substring e.g. \"end\" and
 applies a slightly different time value:
 
-::: {.center}
+
 `T_w=1.5+random.random()`
-:::
+
 
 The point is to simulate a user having trouble typing a specific
 substring. After simulating the typing in multiple paragraphs the
@@ -429,9 +413,7 @@ testing function then returns the percentage of words in the final
 paragraph with that specific substring. Here is the result of the
 substring \"end\" on 50 iterations:
 
-::: {.center}
-[tester]{.image}
-:::
+
 
 This is a significant result that was repeatedly occurring when I ran
 the program. 57% of the final paragraph had the substring \"end\" in it,
@@ -446,15 +428,8 @@ With a slight modification to the test file and the creation of a
 graphing file in python, we can show the percentage of current words
 with a substring in it. With alpha equal to one the result is:
 
-::: {.center}
-[image]{.image}
-:::
 
 When we lower the alpha the graph changes:
-
-::: {.center}
-[image]{.image}
-:::
 
 Unsurprisingly there is more fluctuation in the lower alpha graph, since
 more random nodes are added to the paragraph on each iteration. However
@@ -467,10 +442,6 @@ fairly effective at making a user type the substring, but the 0.85 alpha
 allows for more exploration and helps finds inefficient words faster. As
 a comparison this is what the graph looks like when presented with
 random words (alpha = 0).
-
-::: {.center}
-[image]{.image}
-:::
 
 The graph never reaches over the 10% mark at spends over 85% of its
 iterations at 0. Further pointing to the algorithm's success at
