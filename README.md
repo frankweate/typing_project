@@ -7,7 +7,7 @@ see **project.pdf** for more detail and images
 
 # A Typing Algorithm
 
-**https://github.com/frankweate/typing_project** As someone who has recently
+As someone who has recently
 begun to touch type. I saw this as the perfect opportunity to create an
 Algorithm to help me learn. Most touch typing tutors online often use
 pre-written text files (typing.com) or made up words (keybr.com) to
