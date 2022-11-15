@@ -2,7 +2,7 @@
 
 # Frank Weate 
 November 2021 <br>
-see **project.pdf** for more detail and images 
+see [typing_project.pdf](https://github.com/frankweate/typing_project/blob/main/typing_project.pdf) for more detail and images 
 
 
 # A Typing Algorithm
